@@ -32,15 +32,16 @@ def split(s):
     return (int(score),int(shoot))
 
 
-async def parser(html):
+async def parser(url,html):
     try:
         #print("ggg")
         # html = html.decode('utf8')
         #print("decode")
         soup = BeautifulSoup(html, "html.parser")
+        timestr = str(soup.find("p",{"class":"time_f"}).string)
     except:
+        print(url,"not exist")
         return 
-    timestr = str(soup.find("p",{"class":"time_f"}).string)
     date = "{}-{}-{}".format(timestr[3:7],timestr[8:10],timestr[11:13])
     #print(timestr,date)
     sit = ""
@@ -150,7 +151,7 @@ async def download(url):
                 html = await response.text()
                 fetch_count+=1
                 #html = await fetch(session, url)
-                await parser(html)
+                await parser(url,html)
                 parse_count+=1
 
 urls=['https://nba.hupu.com/games/boxscore/%d' %i for i in range(page_range[0],page_range[1])]
