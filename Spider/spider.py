@@ -6,11 +6,16 @@ import aiohttp
 import json
 from bs4 import BeautifulSoup
 import threading
-import sys
+import sys,getopt
+
 player=[]
 sem =asyncio.Semaphore(100)
 player_stats=['球员','比赛时间','位置','时间','2分命中','2分出手','3分命中','前场','后场','篮板','助攻','犯规','抢断','失误','封盖','得分','正负值','3分出手','罚球命中','罚球出手','2分命中率','3分命中率','罚球命中率','获胜','首发','队名','主客','客队得分','主队得分']
-page_range = (156000,156999)
+try:
+    page_range = (int(sys.argv[1]),int(sys.argv[2]))
+except:
+    print("请输入参数 <begin num> <end num>")
+    sys.exit(-1)
 page_num = page_range[1]-page_range[0]
 fetch_count = 0
 parse_count = 0
@@ -135,10 +140,6 @@ async def parser(html):
                 else:
                     s['获胜']=1
             player.append(s)
-            # if name not in player:
-            #     player[name]={}
-            # player[name][time]=s
-            #print(player)
 
 async def download(url):
     global fetch_count
@@ -154,12 +155,6 @@ async def download(url):
 
 urls=['https://nba.hupu.com/games/boxscore/%d' %i for i in range(page_range[0],page_range[1])]
 
-def printPlayerList():
-    print("Player num:",len(player))
-    #print("Game of 凯文-杜兰特：",len(player["凯文-杜兰特"]))
-    # for player in ulist:
-    #     print(player)
-    #     print(ulist[player])
 def print_progress():
     while(1):
         time.sleep(.5)
@@ -173,7 +168,7 @@ def print_progress():
             break
 
 
-print("#????")
+print('#'*20)
 t1=time.time()
 t = threading.Thread(target = print_progress)
 t.start()
@@ -185,5 +180,5 @@ with open("result{}_{}.json".format(page_range[0],page_range[1]),"w+",encoding='
     json.dump(player,file,ensure_ascii=False,indent=0)
 t2=time.time()
 print("using time :%s"% (t2-t1))
-print("#????")
-printPlayerList()
+print("#"*20)
+print("记录条数：",len(player))
