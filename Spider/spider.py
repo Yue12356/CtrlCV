@@ -33,111 +33,112 @@ async def parser(html):
         # html = html.decode('utf8')
         #print("decode")
         soup = BeautifulSoup(html, "html.parser")
-        timestr = str(soup.find("p",{"class":"time_f"}).string)
-        time = "{}-{}-{}".format(timestr[3:7],timestr[8:10],timestr[11:13])
-        sit = ""
-        team= []
-        homeOrAway=["None","0","1"]
-        teamIndex=1
-        firstZero=1
-        awayTotal=str(soup.find("div",{"class":"team_a"})('div')[1]('h2')[0].string).replace("\n","")
-        homeTotal=str(soup.find("div",{"class":"team_b"})('div')[1]('h2')[0].string).replace("\n","")
-        if(int(awayTotal)>int(homeTotal)):
-            awayWin=1
-        else:
-            awayWin=0
-        for tr in soup.find_all("tr"):
-            tds=tr('td')
-            if tds[0].string=='首发':
-                sit="1"
-                continue
-            if tds[0].string=="替补":
-                sit="0"
-                continue
-            if tds[0].string=="统计":
-                #sit="替补"
-                continue
-            if tds[0].string=="命中率":
-                #sit="替补"
-                continue
-            s={}
-
-            for i in range(len(tds)):
-                if i==0 :
-                    name = str(tds[0].string)
-                    continue
-                try:
-                    tds[i] = tds[i]('span')[0]
-                    # print('haha i have a span: ',tds[i].string)
-                except:
-                    pass
-                if i==3 and '-' in str(tds[i].string):
-                    score,shoot = split(str(tds[i].string))
-                    s['2分命中'] = score
-                    s['2分出手'] = shoot
-                    continue
-                if i == 4 and '-' in str(tds[i].string):
-                    score,shoot = split(str(tds[i].string))
-                    s['3分命中'] = score
-                    s['3分出手'] = shoot
-                    s['2分命中'] -= score
-                    s['2分出手'] -= shoot
-
-                    continue
-                if i == 5 and '-' in str(tds[i].string):
-                    score,shoot = split(str(tds[i].string))
-                    s['罚球命中'] = score
-                    s['罚球出手'] = shoot
-                    continue
-                # s.append(str(tds[i].string).replace("\n",""))
-                s[player_stats[i+1]]=str(tds[i].string).replace("\n","")
-                # print("1 ",s)
-            if len(s)<9:
-                team.append(name)
-                continue
-            if s['时间']=="0":
-                if firstZero==1:
-                    teamIndex=teamIndex+1
-                    firstZero=0
-                continue
-            if s['时间']!="0":
-                s[player_stats[-5]]=sit
-                s[player_stats[-4]]=team[teamIndex]
-                s[player_stats[-3]]=homeOrAway[teamIndex]
-                s[player_stats[-2]]=awayTotal
-                s[player_stats[-1]]=homeTotal
-                # print("2 ",s)
-                s['球员']=name
-                s['比赛时间']=time
-                if s['2分出手'] == '0':
-                    s['2分命中率'] = 0.0
-                else:
-                    s['2分命中率'] = float(s['2分命中'])/float(s['2分出手'])
-                if s['3分出手'] == '0':
-                    s['3分命中率'] = 0.0
-                else:
-                    s['3分命中率'] = float(s['3分命中'])/float(s['3分出手'])
-                if s['罚球出手'] == '0':
-                    s['罚球命中率'] = 0.0
-                else:
-                    s['罚球命中率'] = float(s['罚球命中'])/float(s['罚球出手'])
-                if (teamIndex == 1):
-                    if(awayWin == 1):
-                        s['获胜']=1
-                    else:
-                        s['获胜']=0 
-                else:
-                    if(awayWin == 1):
-                        s['获胜']=0
-                    else:
-                        s['获胜']=1
-                player.append(s)
-                # if name not in player:
-                #     player[name]={}
-                # player[name][time]=s
-                #print(player)
     except:
-        pass
+        return 
+    timestr = str(soup.find("p",{"class":"time_f"}).string)
+    date = "{}-{}-{}".format(timestr[3:7],timestr[8:10],timestr[11:13])
+    #print(timestr,date)
+    sit = ""
+    team= []
+    homeOrAway=["None","0","1"]
+    teamIndex=1
+    firstZero=1
+    awayTotal=str(soup.find("div",{"class":"team_a"})('div')[1]('h2')[0].string).replace("\n","")
+    homeTotal=str(soup.find("div",{"class":"team_b"})('div')[1]('h2')[0].string).replace("\n","")
+    if(int(awayTotal)>int(homeTotal)):
+        awayWin=1
+    else:
+        awayWin=0
+    for tr in soup.find_all("tr"):
+        tds=tr('td')
+        if tds[0].string=='首发':
+            sit="1"
+            continue
+        if tds[0].string=="替补":
+            sit="0"
+            continue
+        if tds[0].string=="统计":
+            #sit="替补"
+            continue
+        if tds[0].string=="命中率":
+            #sit="替补"
+            continue
+        s={}
+
+        for i in range(len(tds)):
+            if i==0 :
+                name = str(tds[0].string)
+                continue
+            try:
+                tds[i] = tds[i]('span')[0]
+                # print('haha i have a span: ',tds[i].string)
+            except:
+                pass
+            if i==3 and '-' in str(tds[i].string):
+                score,shoot = split(str(tds[i].string))
+                s['2分命中'] = score
+                s['2分出手'] = shoot
+                continue
+            if i == 4 and '-' in str(tds[i].string):
+                score,shoot = split(str(tds[i].string))
+                s['3分命中'] = score
+                s['3分出手'] = shoot
+                s['2分命中'] -= score
+                s['2分出手'] -= shoot
+
+                continue
+            if i == 5 and '-' in str(tds[i].string):
+                score,shoot = split(str(tds[i].string))
+                s['罚球命中'] = score
+                s['罚球出手'] = shoot
+                continue
+            # s.append(str(tds[i].string).replace("\n",""))
+            s[player_stats[i+1]]=str(tds[i].string).replace("\n","")
+            # print("1 ",s)
+        if len(s)<11:
+            team.append(name)
+            continue
+        if s['时间']=="0":
+            if firstZero==1:
+                teamIndex=teamIndex+1
+                firstZero=0
+            continue
+        if s['时间']!="0":
+            s[player_stats[-5]]=sit
+            s[player_stats[-4]]=team[teamIndex]
+            s[player_stats[-3]]=homeOrAway[teamIndex]
+            s[player_stats[-2]]=awayTotal
+            s[player_stats[-1]]=homeTotal
+            # print("2 ",s)
+            s['球员']=name
+            s['比赛时间']=date
+            if s['2分出手'] == 0:
+                s['2分命中率'] = 0.0
+            else:
+                s['2分命中率'] = float(s['2分命中'])/float(s['2分出手'])
+            if s['3分出手'] == 0:
+                s['3分命中率'] = 0.0
+            else:
+                s['3分命中率'] = float(s['3分命中'])/float(s['3分出手'])
+            if s['罚球出手'] == 0:
+                s['罚球命中率'] = 0.0
+            else:
+                s['罚球命中率'] = float(s['罚球命中'])/float(s['罚球出手'])
+            if (teamIndex == 1):
+                if(awayWin == 1):
+                    s['获胜']=1
+                else:
+                    s['获胜']=0 
+            else:
+                if(awayWin == 1):
+                    s['获胜']=0
+                else:
+                    s['获胜']=1
+            player.append(s)
+            # if name not in player:
+            #     player[name]={}
+            # player[name][time]=s
+            #print(player)
 
 async def download(url):
     global fetch_count
