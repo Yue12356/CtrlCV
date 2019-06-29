@@ -51,6 +51,7 @@ async def parser(url,html):
     firstZero=1
     awayTotal=str(soup.find("div",{"class":"team_a"})('div')[1]('h2')[0].string).replace("\n","")
     homeTotal=str(soup.find("div",{"class":"team_b"})('div')[1]('h2')[0].string).replace("\n","")
+    print(awayTotal,":",homeTotal)
     if(int(awayTotal)>int(homeTotal)):
         awayWin=1
     else:
