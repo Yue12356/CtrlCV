@@ -40,7 +40,7 @@ async def parser(url,html):
         soup = BeautifulSoup(html, "html.parser")
         timestr = str(soup.find("p",{"class":"time_f"}).string)
     except:
-        print(url,"not exist")
+        print(url,"页面不存在")
         return 
     date = "{}-{}-{}".format(timestr[3:7],timestr[8:10],timestr[11:13])
     #print(timestr,date)
@@ -51,11 +51,13 @@ async def parser(url,html):
     firstZero=1
     awayTotal=str(soup.find("div",{"class":"team_a"})('div')[1]('h2')[0].string).replace("\n","")
     homeTotal=str(soup.find("div",{"class":"team_b"})('div')[1]('h2')[0].string).replace("\n","")
-    print(awayTotal,":",homeTotal)
-    if(int(awayTotal)>int(homeTotal)):
-        awayWin=1
-    else:
-        awayWin=0
+    try:
+        if(int(awayTotal)>int(homeTotal)):
+            awayWin=1
+        else:
+            awayWin=0
+    except:
+        print(url,"这是一个比赛前瞻页面")
     for tr in soup.find_all("tr"):
         tds=tr('td')
         if tds[0].string=='首发':
