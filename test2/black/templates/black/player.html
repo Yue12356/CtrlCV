@@ -1,0 +1,250 @@
+{% extends "black/base.html" %}
+{% block content %}
+  <section class="probootstrap-slider flexslider">
+      {% comment %} <li style="background-image: url(img/slider_1.jpg);"> {% endcomment %}
+      <li>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="slides-text probootstrap-animate">
+              <h2>{{name}} 的近 {{date_range}} 场表现：</h2>
+              <h3>
+                {% for item in result %}
+                <li>{{item}}</li>
+                {% endfor %}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+  </section>
+
+
+<section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+          <canvas id="myChart" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{point|safe}}
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '总得分',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(255, 99, 132, 0.2)',
+                        borderColor: 
+                            'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+            <canvas id="two_hit" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{two_hit|safe}}
+            var ctx = document.getElementById('two_hit').getContext('2d');
+            var two_hit = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '2分球命中',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(54, 162, 235, 0.2)',
+                        borderColor: 
+                            'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+            <canvas id="three_hit" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{three_hit|safe}}
+            var ctx = document.getElementById('three_hit').getContext('2d');
+            var three_hit = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '#3分球命中',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(255, 206, 86, 0.2)',
+                        borderColor: 
+                            'rgba(255, 206, 86, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+
+            <canvas id="penalty_hit" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{penalty_hit|safe}}
+            var ctx = document.getElementById('penalty_hit').getContext('2d');
+            var penalty_hit = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '#罚球命中',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(75, 192, 192, 0.2)',
+                        borderColor: 
+                            'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+            <canvas id="bord" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{bord|safe}}
+            var ctx = document.getElementById('bord').getContext('2d');
+            var bord = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '#篮板',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(153, 102, 255, 0.2)',
+                        borderColor: 
+                            'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="service left-icon probootstrap-animate">
+            <canvas id="sup" width="200" height="200"></canvas>
+            <script>
+            var lable = {{lables|safe}}
+            var data = {{sup|safe}}
+            var ctx = document.getElementById('sup').getContext('2d');
+            var sup = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: lable,
+                    datasets: [{
+                        label: '助攻',
+                        data: data,
+                        backgroundColor: 
+                            'rgba(255, 159, 64, 0.2)',
+                        borderColor: 
+                            'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- END section -->
+  
+  <div class="container">
+    <div class="probootstrap-cta probootstrap-animate border-bototm-none">
+      <h2 class="mb20">Do you have amazing project in mind? Let's get started.</h2>
+      <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+      <p><a href="#" role="button" class="btn btn-primary">Get In Touch</a></p>
+    </div>
+  </div>
+
+
+{% endblock content %}

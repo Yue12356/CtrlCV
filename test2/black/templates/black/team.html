@@ -1,0 +1,24 @@
+{% extends "black/base2.html" %}
+{% block content %}
+
+    <section class="probootstrap-slider flexslider">
+        <ul class="slides">
+          <li style="background-image: url(../../static/black/img/team.jpg);">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="slides-text probootstrap-animate">
+                    <h2>球队数据</h2>
+                    <form action="#" method="POST">
+                      <input class="search-bar" type="text" placeholder="请输入球队名称">
+                      <input class="search-button" type="submit" value="搜索">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+    </section>
+{% endblock content %}
+

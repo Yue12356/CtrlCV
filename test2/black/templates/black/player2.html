@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>大篮球 &mdash; 球员数据</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/black/contents/styles-merged.css">
+    <link rel="stylesheet" href="../../static/black/contents/style.min.css">
+    <link rel="stylesheet" href="../../static/black/contents/custom.css">
+    <link rel="stylesheet" href="../../static/black/contents/playerscustom.css">
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="players-body">
+      <header class="v-header players-container">
+          <div class="fullscreen-video-wrap">
+            <video src="../../static/black/vedio/bgv.mp4" autoplay="true" loop="true">
+          </video>
+          </div>
+          <div class="header-overlay"></div>
+          <div class="header-content text-md-center">
+            <h2>输入名字查询球员数据</h2>
+                <form style="color:white" action="/player?name=submit" method="GET">
+                    {% csrf_token %}
+                    <p><b style="color:black">姓名：{{ form.name }}</b> </p>
+                    <p><b style="color:black">查询最近 {{form.date_range}} 场</b></p>
+                    <input style="color:black" type="submit" value="submit">
+          </div>
+        </header>
+
+  <!-- START: header -->
+  
+  <div class="probootstrap-loader"></div>
+
+  <header role="banner" class="probootstrap-header">
+    <div class="container">
+        <a href="index.html" class="probootstrap-logo">Ctrl C/V<span>.</span></a>
+        
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>更多</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+          <ul class="probootstrap-main-nav">
+            <li><a href="index.html">主页</a></li>
+            <li><a href="about.html">关于我们</a></li>
+          </ul>
+          <ul class="probootstrap-right-nav hidden-xs">
+            <li><a href="#"><i class="icon-twitter"></i></a></li>
+            <li><a href="#"><i class="icon-facebook2"></i></a></li>
+            <li><a href="#"><i class="icon-instagram2"></i></a></li>
+          </ul>
+          <div class="extra-text visible-xs"> 
+            <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+            <h5>地址</h5>
+            <p>咸宁西路, 西安交通大学 710049</p>
+            <h5>关注我们</h5>
+            <ul class="social-buttons">
+              <li><a href="#"><i class="icon-twitter"></i></a></li>
+              <li><a href="#"><i class="icon-facebook2"></i></a></li>
+              <li><a href="#"><i class="icon-instagram2"></i></a></li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+  </header>
+  {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+  <!-- END: header -->
+  <footer class="players-footer">
+    <p>
+      Copyright &copy; 2019, CTRL C/V
+    </p>
+  </footer>
+
+
+
+  
+  <div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+  </div>
+  <script src="../../static/black/scripts/scripts.min.js"></script>
+  <script src="../../static/black/scripts/main.min.js"></script>
+  <script src="../../static/black/scripts/custom.js"></script>
+  
+  </body>
+</html>

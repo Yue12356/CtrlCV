@@ -1,0 +1,32 @@
+{% extends "black/base2.html" %}
+{% block content %}
+
+    <section class="probootstrap-slider flexslider">
+        <ul class="slides">
+          <li style="background-image: url(../../static/black/img/game.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="slides-text probootstrap-animate">
+                    <h2>胜率预测</h2>
+                    <form class="grid" action="#" method="POST">
+                      <div class="box1">
+                      <input class="search-bar bar1" type="text" placeholder="请输入球队名称">
+                      </div>
+                      <img id="image" src="../../static/black/img/VS.png">
+                      <div class="box2">
+                      <input class="search-bar bar2" type="text" placeholder="请输入球队名称">
+                      </div>
+                      <input class="search-button" type="submit" value="查询">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+    </section>
+
+  
+{% endblock content %}

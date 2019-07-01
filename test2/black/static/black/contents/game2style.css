@@ -1,0 +1,38 @@
+#image{
+    width: 120px;
+    height: 120px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr; 
+}
+
+.bar1{
+    margin-top: 43px; 
+    border-radius: 20px 0 0 20px;
+}
+
+.bar2{
+    margin-top: 43px; 
+    border-radius: 0 20px 20px 0;
+}
+
+.search-button{
+    grid-column: 2/3;
+}
+
+.search-button:hover{
+    background: chocolate;
+}
+
+.overlay{
+    height:100vh;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    z-index:1;
+    background:#000000;
+    opacity:0.3;
+}

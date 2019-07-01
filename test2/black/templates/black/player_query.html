@@ -1,0 +1,25 @@
+{% extends "black/base.html" %}
+{% block content %}
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+      <li>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div style="color:black" class="slides-text probootstrap-animate">
+                <h2>输入名字查询球员数据</h2>
+                <form style="color:black" action="/player?name=submit" method="GET">
+                    {% csrf_token %}
+                    <b style = "color:white">姓名：</b>{{ form.name }} <b style = "color:white">查询最近</b> {{form.date_range}} <b style = "color:white">场</b>
+                    <input style="color:black" type="submit" value="submit">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+{% endblock content %}

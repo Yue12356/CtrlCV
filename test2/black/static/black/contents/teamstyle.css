@@ -1,0 +1,29 @@
+footer p{
+    text-align: center;
+    padding: 30px 0px 0px 0px;
+    color: darkgray;
+}
+.search-button{
+    border: none;
+    background: #000;
+    padding: 4px 20px;
+    position: relative;
+    left: -5px;
+}
+
+.search-button[type="submit"]{
+    border-radius: 0 10px 10px 0;
+}
+
+.search-button:hover{
+    background: chocolate;
+}
+.search-bar{
+    color: #000;
+    border: 0px;
+    padding: 3px 10px;
+}
+
+.search-bar[type="text"]{
+    border-radius: 10px 0 0 10px;
+}
