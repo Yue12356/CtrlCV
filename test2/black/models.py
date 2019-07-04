@@ -36,4 +36,31 @@ class PlayerInfo(models.Model):
         managed = True
         verbose_name = 'black'
         verbose_name_plural = 'blacks'
+        ordering = ['game_time']
 # Create your models here.
+
+class teamInfo(models.Model):
+    index = models.IntegerField(primary_key=True)
+    game_time = models.DateField()
+    two_hit = models.SmallIntegerField()
+    two_shot = models.SmallIntegerField()
+    three_hit = models.SmallIntegerField()
+    three_shot = models.SmallIntegerField()
+    penalty_hit = models.SmallIntegerField()
+    penalty_shot = models.SmallIntegerField()
+    front = models.PositiveSmallIntegerField()
+    back = models.PositiveSmallIntegerField()
+    bord = models.PositiveSmallIntegerField()
+    foul = models.PositiveSmallIntegerField()
+    miss = models.SmallIntegerField()
+    block = models.SmallIntegerField()
+    point = models.SmallIntegerField()
+    team_name = models.CharField(max_length = 120)
+    wining = models.SmallIntegerField()
+    class Meta:
+        db_table = 'teaminfo'
+        managed = False
+        verbose_name = 'black'
+        verbose_name_plural = 'blacks'
+        ordering = ['game_time']
+

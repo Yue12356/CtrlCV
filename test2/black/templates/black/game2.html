@@ -1,6 +1,5 @@
 {% extends "black/base2.html" %}
 {% block content %}
-
     <section class="probootstrap-slider flexslider">
         <ul class="slides">
           <li style="background-image: url(../../static/black/img/game.jpg);">
@@ -8,17 +7,59 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <div class="slides-text probootstrap-animate">
+                  <div class="slides-text probootstrap-animate" style="margin-top: -30%">
                     <h2>胜率预测</h2>
-                    <form class="grid" action="#" method="POST">
+                    {% if error %}
+                      <h3>{{ error }}</h3>
+                    {% else %}
+                    {% endif %}
+                    <form class="grid" action="/game2" method="POST">
+                      {% csrf_token %}
                       <div class="box1">
-                      <input class="search-bar bar1" type="text" placeholder="请输入球队名称">
+                        <input name='team_A' id='team_A' class="search-bar bar1" type="text" placeholder="请输入客队名称">
                       </div>
-                      <img id="image" src="../../static/black/img/VS.png">
+                      <div>
+                        <h3>{{ win_prediction }}</h3>
+                      </div>
                       <div class="box2">
-                      <input class="search-bar bar2" type="text" placeholder="请输入球队名称">
+                        <input name='team_B' id='team_B' class="search-bar bar2" type="text" placeholder="请输入主队名称">
                       </div>
-                      <input class="search-button" type="submit" value="查询">
+                      <div>
+                        <h4>配置首发球员</h4>
+                        <input name='playerA_1' id='playerA_1' class="search-bar" type="text" placeholder="球员名称:上场时间">
+                        <input name='playerA_2' id='playerA_2' class="search-bar" type="text" placeholder="请输入球员名称">
+                        <input name='playerA_3' id='playerA_3' class="search-bar" type="text" placeholder="请输入球员名称">
+                        <input name='playerA_4' id='playerA_4' class="search-bar" type="text" placeholder="请输入球员名称">
+                        <input name='playerA_5' id='playerA_5' class="search-bar" type="text" placeholder="请输入球员名称">
+                      </div>
+                      <img id="image" src="../../static/black/img/VS.png" style="margin-top: 10%">
+                      <div>
+                          <h4>配置首发球员</h4>
+                          <input name='playerB_1' id='playerB_1' class="search-bar" type="text" placeholder="球员名称:上场时间">
+                          <input name='playerB_2' id='playerB_2' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_3' id='playerB_3' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_4' id='playerB_4' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_5' id='playerB_5' class="search-bar" type="text" placeholder="请输入球员名称">
+                      </div>
+                      <div>
+                          <h4>配置替补球员</h4>
+                          <input name='playerA_6' id='playerA_6' class="search-bar" type="text" placeholder="球员名称:上场时间">
+                          <input name='playerA_7' id='playerA_7' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerA_8' id='playerA_8' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerA_9' id='playerA_9' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerA_10' id='playerA_10' class="search-bar" type="text" placeholder="请输入球员名称">
+                      </div>
+                      <div>
+                      <input class="search-button" type="submit" id='submit' value="查询">
+                      </div>  
+                      <div>
+                          <h4>配置替补球员</h4>
+                          <input name='playerB_6' id='playerB_6' class="search-bar" type="text" placeholder="球员名称:上场时间">
+                          <input name='playerB_7' id='playerB_7' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_8' id='playerB_8' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_9' id='playerB_9' class="search-bar" type="text" placeholder="请输入球员名称">
+                          <input name='playerB_10' id='playerB_10' class="search-bar" type="text" placeholder="请输入球员名称">
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -27,6 +68,4 @@
           </li>
         </ul>
     </section>
-
-  
 {% endblock content %}

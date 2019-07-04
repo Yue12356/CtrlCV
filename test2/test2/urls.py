@@ -19,6 +19,7 @@ import black.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/', black.views.home, name='black_home'),
     path('base/', black.views.base, name='black_base'),
     path('about/', black.views.about, name='black_about'),
     path('player/', black.views.player, name='black_player'),
@@ -26,7 +27,9 @@ urlpatterns = [
     path('player_query/', black.views.player_query, name='black_plary_query'),
     # path('chart_test/', black.views.ChartTest.as_view(), name='black_ChartTest'),
     path('chart_test/', black.views.chart_test, name='black_chart_test'),
-    path('game2/', black.views.game2),
+    path('game2', black.views.game2,name="black_game2"),
+    #path('game2_ajax/', black.views.game2_ajax),
     path('team/', black.views.team),
+    path('team_data/', black.views.team_data),
     path('', black.views.home, name='black_home')
 ]

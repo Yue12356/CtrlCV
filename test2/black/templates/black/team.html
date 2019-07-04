@@ -1,4 +1,4 @@
-{% extends "black/base2.html" %}
+{% extends "black/base.html" %}
 {% block content %}
 
     <section class="probootstrap-slider flexslider">
@@ -9,10 +9,12 @@
                 <div class="col-md-12 text-center">
                   <div class="slides-text probootstrap-animate">
                     <h2>球队数据</h2>
-                    <form action="#" method="POST">
-                      <input class="search-bar" type="text" placeholder="请输入球队名称">
-                      <input class="search-button" type="submit" value="搜索">
-                    </form>
+                    <form style="color:black" action="/team_data?teamName=submit" method="GET">
+                      {% csrf_token %}
+                      <b style = "color:white">球队名称：</b>{{ form.teamName }}
+                      <b style = "color:white">查询最近</b> {{form.date_range}} <b style = "color:white">场</b> 
+                      <input style="color:black" type="submit" value="搜索">
+                  </form>
                   </div>
                 </div>
               </div>
